@@ -10,15 +10,18 @@
 
 class PlugBoard {
 public: 
-	PlugBoard() { createBoard(); }
-	~PlugBoard() {}
+	//PlugBoard() { createBoard(); }
+	//~PlugBoard() {}
 
 	auto encode(const MessageElement &text) -> tl::expected<MessageElement, ENIGERR>;
 	auto plug(const MessageElement& from, const MessageElement& to)->tl::expected<void, ENIGERR>;
+	void createBoard();
+	void presetBoard0();
+	void returnBoard();
 
 private:
 	std::unordered_map<MessageElement, MessageElement> board;
-	void constexpr createBoard();
+	
 	bool checkElement(const MessageElement& element);
 
 };
