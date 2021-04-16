@@ -56,13 +56,15 @@ auto EnigmaEncoder::encode(const MessageElement& elem)->tl::expected<MessageElem
 		return tl::make_unexpected(err);
 	};
 
-	return r1Do(elem)
+	auto ret = r1Do(elem)
 		.and_then(r2Do)
 		.and_then(r3Do)
 		.and_then(returnDo)
 		.and_then(r3DoR)
 		.and_then(r2DoR)
 		.and_then(r1DoR);
+
+	return ret.value();
 }
 
 auto EnigmaEncoder::encodeText(const Message& message)->tl::expected<Message, ENIGERR> {
@@ -76,14 +78,13 @@ auto EnigmaEncoder::encodeText(const Message& message)->tl::expected<Message, EN
 
 
 void EnigmaEncoder::setRotors(const RotorPosition& a, const RotorPosition& b, const RotorPosition& c) {
-	pos1 = a%26;
-	pos2 = b%26;
-	pos3 = c%26;
-	resetRotors();
+	r1->setRotorPosition(a);
+	r2->setRotorPosition(b);
+	r3->setRotorPosition(c);
 }
 
 void EnigmaEncoder::resetRotors() {
-	r1->setRotorPosition(pos1);
-	r2->setRotorPosition(pos2);
-	r3->setRotorPosition(pos3);
+	r1->resetRotor();
+	r2->resetRotor();
+	r3->resetRotor();
 }

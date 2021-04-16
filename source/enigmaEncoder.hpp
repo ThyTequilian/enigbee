@@ -26,11 +26,6 @@ private:
 	Rotor *r3;
 
 	PlugBoard *returnRotor;
-
-	RotorPosition pos1 = 0;
-	RotorPosition pos2 = 0;
-	RotorPosition pos3 = 0;
-
 };
 
 #endif
