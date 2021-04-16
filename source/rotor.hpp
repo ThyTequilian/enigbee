@@ -2,7 +2,7 @@
 #define rotor
 
 #include <string>
-#include <unordered_map>
+#include <map>
 
 #include "typeDefinitions.hpp"
 #include "tl/expected.hpp"
@@ -23,10 +23,11 @@ public:
 	~Rotor() {}
 
 	auto encode(const MessageElement &element) -> tl::expected<const MessageElement, ENIGERR>;
+	auto encodeNoRotate(const MessageElement &element) -> tl::expected<const MessageElement, ENIGERR>;
 	auto encodeReverse(const MessageElement& element)->tl::expected<const MessageElement, ENIGERR>;
 	
 	void setRotationOffset(int &x) { rotationOffset = x%26; }
-	void setRotorPosition(int &x) { rotorPosition = x%26; }
+	void setRotorPosition(const RotorPosition &x) { rotorPosition = x%26; }
 	void setToRotorI();
 	void setToRotorII();
 	void setToRotorIII();
@@ -44,8 +45,8 @@ private:
 	void rotate();
 	void setReverseRotorBlade();
 	
-	std::unordered_map<MessageElement, MessageElement> rotorBlade;
-	std::unordered_map<MessageElement, MessageElement> reverseRotorBlade;
+	std::map<MessageElement, MessageElement> rotorBlade;
+	std::map<MessageElement, MessageElement> reverseRotorBlade;
 };
 
 #endif

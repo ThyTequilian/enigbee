@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
 # set the project name
-project(enigma)
+project(enigbee)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 16)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 #Add Subdirectories to Incluce

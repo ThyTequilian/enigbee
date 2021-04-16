@@ -2,7 +2,7 @@
 #define plugBoard
 
 #include <string>
-#include <unordered_map>
+#include <map>
 
 #include "typeDefinitions.hpp"
 #include "tl/expected.hpp"
@@ -20,7 +20,7 @@ public:
 	void returnBoard();
 
 private:
-	std::unordered_map<MessageElement, MessageElement> board;
+	std::map<MessageElement, MessageElement> board;
 	
 	bool checkElement(const MessageElement& element);
 

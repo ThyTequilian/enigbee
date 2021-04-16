@@ -1,12 +1,12 @@
 #include "plugBoard.hpp"
 
 
-auto PlugBoard::encode(const MessageElement& element)->tl::expected<MessageElement, ENIGERR> {
-	if (!checkElement(element)) {
+auto PlugBoard::encode(const MessageElement& elem)->tl::expected<MessageElement, ENIGERR> {
+	if (!checkElement(elem)) {
 		return tl::make_unexpected(ENIGERR::elementOutOfRange);
 	}
-
-	return board[element];
+	MessageElement out = board[elem];
+	return out;
 }
 
 auto PlugBoard::plug(const MessageElement& from, const MessageElement& to)->tl::expected<void, ENIGERR> {
@@ -45,14 +45,17 @@ void PlugBoard::presetBoard0() {
 }
 
 void PlugBoard::returnBoard() {
-	plug(L'a', L'u');
-	plug(L'b', L'w');
-	plug(L'c', L'k');
+	plug(L'a', L'e');
+	plug(L'b', L'j');
+	plug(L'c', L'm');
 	plug(L'd', L'z');
-	plug(L'e', L't');
-	plug(L'f', L'r');
-	plug(L'g', L'p');
-	plug(L'h', L'n');
-	plug(L'i', L'y');
-	plug(L'j', L's');
+	plug(L'f', L'l');
+	plug(L'g', L'y');
+	plug(L'h', L'x');
+	plug(L'i', L'v');
+	plug(L'k', L'w');
+	plug(L'n', L'r');
+	plug(L'o', L'q');
+	plug(L'p', L'u');
+	plug(L's', L't');
 }

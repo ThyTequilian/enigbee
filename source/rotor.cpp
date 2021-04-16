@@ -1,24 +1,27 @@
 #include "rotor.hpp"
 
 auto Rotor::encode(const MessageElement& element)->tl::expected<const MessageElement, ENIGERR> {
-	//rotate();
-	auto a = rotorBlade[element];
-	auto b = a - L'a';
-	auto c = b + rotorPosition;
-	auto d = c % 26;
-	MessageElement e = c + L'a';
-	MessageElement ret = L'a' + (((rotorBlade[element] - L'a') + rotorPosition) % 26);
-	rotate();
-	return ret;
+	
+	MessageElement elem = std::tolower(element);
+	MessageElement in = elem - rotorPosition;
+	while (in < L'a') {
+		in += 26;
+	}
+	MessageElement out = rotorBlade[in];
+	
+	return out;
 }
 
-auto Rotor::encodeReverse(const MessageElement& element)->tl::expected<const MessageElement, ENIGERR> {
-	auto val = ((reverseRotorBlade[element] - L'a') + rotorPosition);
-	if (val < 0) {
-		val = 26 - val;
+auto Rotor::encodeReverse(const MessageElement& elem)->tl::expected<const MessageElement, ENIGERR> {
+	//MessageElement ret = reverseRotorBlade[L'a' + ((elem - L'a' + rotorPosition) % 26) - rotorPosition] - L'a' - rotorPosition;
+	
+	MessageElement out = reverseRotorBlade[elem] + rotorPosition;
+	while (out > L'z') {
+		out -= 26;
 	}
-	MessageElement ret = L'a' + (val % 26);
-	return  ret;
+	rotate();
+	//MessageElement ret = def - rotorPosition + L'a';
+	return  out;
 }
 
 void Rotor::rotate(){

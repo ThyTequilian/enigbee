@@ -9,6 +9,7 @@
 #define typeDefinitions
 
 #include <string>
+#include <map>
 
 //TypeDefinitions
 using Message = std::wstring;
